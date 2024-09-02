@@ -1,5 +1,6 @@
 import json
-import re
+import pickle
+import gzip
 from zipfile import ZipFile
 from io import TextIOWrapper
 from tqdm import tqdm
@@ -10,6 +11,13 @@ from ..data_model import Statement, Entity
 
 PATH = "ProofWiki/proofwiki.zip"
 URL = BASE_URL + "proofwiki.zip"
+
+ANNOT_RESOURCES = {
+    "proofwiki[entities]": {
+        "path": "ProofWiki/proofwiki[entities].pickle.gz",
+        "url": BASE_URL + "proofwiki[entities].pickle.gz"
+    }
+}
 
 
 class ProofWikiKB(KnowledgeBase):
@@ -118,5 +126,25 @@ class ProofWikiKB(KnowledgeBase):
             match = False
 
         return match
+
+    @staticmethod
+    def from_resource(locator: str):
+        """
+        Downloads a pre-annotated resource available at the specified locator
+
+        Example:
+            >>> kb = ProofWikiKB.from_resource("proofwiki[entities]")
+        """
+        kb = None
+        if (locator in ANNOT_RESOURCES):
+            path = ANNOT_RESOURCES[locator]["path"]
+            url = ANNOT_RESOURCES[locator]["url"]
+            data_path = KnowledgeBase.download_resource(path, url)
+            with gzip.open(data_path, "rb") as resource_file:
+                kb = pickle.load(resource_file)
+        else:
+            print(f"No resource found at locator: {locator}")
+
+        return kb
 
 

@@ -70,7 +70,7 @@ train_propositions = [stt for stt in kb
 print( train_propositions[0].surface)
 # Let $A$ be a preadditive category.
 
- print("\n".join([prem.surface for prem in train_propositions[0].premises]))
+print("\n".join([prem.surface for prem in train_propositions[0].premises]))
 # Let $\mathbf C$ be a metacategory.
 # Let $A$ and $B$ be objects of $\mathbf C$.
 # A '''(binary) product diagram''' for $A$ and $B$ comprises an object $P$ and morphisms $p_1: P \to A$, $p_2: P \to B$:
@@ -118,5 +118,5 @@ print( train_propositions[0].surface)
 # {{expand|the projection definition may merit its own, separate page}}
 ```
 
-**Available datasets:** e-SNLI, ProofWiki, WorldTree.
+**Available datasets:** e-SNLI (ESNLIKB), ProofWiki (ProofWikiKB), WorldTree (WorldTreeKB).
 

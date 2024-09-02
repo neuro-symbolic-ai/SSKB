@@ -29,5 +29,30 @@ class KnowledgeBase(Sequence[Statement]):
     def keys(self):
         raise NotImplementedError
 
+    @staticmethod
+    def from_resource(locator: str):
+        raise NotImplementedError
+
+    @staticmethod
+    def download_resource(path: str, url: str):
+        """
+        Downloads a resource from a specified URL to a specified path
+
+        This method is used to download original or preprocessed data that backs the KnowledgeBase instances.
+
+        Args:
+            path (str): The subpath to the resource within the base path.
+            url (str): The URL from which to download the resource.
+
+        Returns:
+            str: The normalized path where the resource has been downloaded.
+        """
+        data_path: str = os.path.normpath(os.path.join(str(Path.home()), BASE_PATH, path))
+        if (not os.path.exists(data_path)):
+            os.makedirs(os.path.join(*os.path.split(data_path)[:-1]), exist_ok=True)
+            gdown.download(url, data_path)
+
+        return data_path
+
 
 
