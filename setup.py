@@ -16,7 +16,7 @@ def load_requirements() -> list:
 
 setup(
     name='sskb',
-    version='0.1.2',
+    version='0.1.3',
     packages=['sskb', 'sskb.data_access'],
     url='',
     license='',
