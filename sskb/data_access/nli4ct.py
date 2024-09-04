@@ -1,13 +1,11 @@
 import json
-import pickle
-import gzip
 from zipfile import ZipFile
 from io import TextIOWrapper
 from tqdm import tqdm
 from spacy.lang.en import English
 from saf import Token
-from ..skb import KnowledgeBase, BASE_URL
-from ..data_model import Statement, Entity
+from ..skb import KnowledgeBase
+from ..data_model import Statement
 
 PATH = "NLI4CT/Complete_dataset.zip"
 URL = "https://github.com/ai-systems/nli4ct/raw/main/Complete_dataset.zip"
@@ -15,7 +13,7 @@ URL = "https://github.com/ai-systems/nli4ct/raw/main/Complete_dataset.zip"
 
 class NLI4CTKB(KnowledgeBase):
     """
-    Wrapper for the ProofWiki dataset (Ferreira et al., 2018): https://github.com/ai-systems/tg2022task_premise_retrieval
+    Wrapper for the NLI4CT dataset (Julien et al., 2018): https://github.com/ai-systems/nli4ct
     """
     def __init__(self, path: str = PATH, url: str = URL):
         super().__init__(path, url)
