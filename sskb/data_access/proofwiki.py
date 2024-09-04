@@ -35,12 +35,12 @@ class ProofWikiKB(KnowledgeBase):
         with ZipFile(self.data_path) as dataset_file:
             self.data = list()
 
-            with TextIOWrapper(dataset_file.open(f"ProofWiki/def_titles.txt"), encoding="utf-8") as ent_file:
+            with TextIOWrapper(dataset_file.open("ProofWiki/def_titles.txt"), encoding="utf-8") as ent_file:
                 for line in ent_file:
                     ent = Entity(line.strip(), self.id)
                     self.entities.append(ent)
 
-            with TextIOWrapper(dataset_file.open(f"ProofWiki/knowledge_base.json"), encoding="utf-8") as data_file:
+            with TextIOWrapper(dataset_file.open("ProofWiki/knowledge_base.json"), encoding="utf-8") as data_file:
                 data = json.load(data_file)
                 for key in tqdm(data, desc=f"Loading data [Knowledge Base]"):
                     self.key_idx[int(key)] = list()
