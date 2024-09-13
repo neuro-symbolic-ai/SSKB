@@ -40,6 +40,7 @@ class ESNLIKB(KnowledgeBase):
                             stt.annotations["type"] = "fact"
                             stt.annotations["number"] = int(sent_key[-1])
                             stt.annotations["id"] = row["pairID"]
+                            stt.annotations["SSKB_ID"] = f"{self.id}::{row['pairID']}"
                             for i in range(1, 4):
                                 if (f"{sent_key}_marked_{i}" in row):
                                     stt.annotations[f"{sent_key}_marked_{i}"] = row[f"{sent_key}_marked_{i}"]
@@ -66,6 +67,7 @@ class ESNLIKB(KnowledgeBase):
                                 stt.annotations["type"] = "explanation"
                                 stt.annotations["number"] = expl_key[-1]
                                 stt.annotations["id"] = row["pairID"]
+                                stt.annotations["SSKB_ID"] = f"{self.id}::{row['pairID']}"
 
                                 for tok in self.tokenizer(stt.surface):
                                     token = Token()

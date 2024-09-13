@@ -1,5 +1,6 @@
 from typing import Self, Any
 from dataclasses import dataclass, field
+from xxhash import xxh128_hexdigest
 from saf import Sentence
 
 
@@ -18,5 +19,9 @@ class Statement(Sentence):
         self.surface: str = surface
         self.premises: list[Self] = list()
         self.entities: list[Entity] = list()
+
+    @property
+    def id(self) -> str:
+        return self.annotations["SSKB_ID"] if ("SSKB_ID" in self.annotations) else xxh128_hexdigest(self.surface)
 
 

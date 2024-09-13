@@ -39,6 +39,7 @@ class WorldTreeKB(KnowledgeBase):
                         surface = " ".join([t[0] for t in terms if t[0].strip()])
                         stt = Statement(surface)
                         stt.annotations["UID"] = uid
+                        stt.annotations["SSKB_ID"] = f"{self.id}::{uid}"
                         stt.annotations["type"] = "fact"
                         stt.annotations["table"] = table_name
                         if ("[SKIP] DEP" in row and row["[SKIP] DEP"].startswith("SW")):
@@ -79,6 +80,7 @@ class WorldTreeKB(KnowledgeBase):
                     reader = DictReader(q_file, delimiter="\t")
                     for row in tqdm(reader, desc=f"Loading questions [{split}]"):
                         stt = Statement(row["question"])
+                        stt.annotations["SSKB_ID"] = f"{self.id}::{row['QuestionID']}"
                         for field in row:
                             stt.annotations[field] = row[field]
                         del stt.annotations["question"]

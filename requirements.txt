@@ -1,3 +1,4 @@
 saf-nlp
 tqdm
 spacy
+xxhash

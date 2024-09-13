@@ -41,6 +41,7 @@ class NLI4CTKB(KnowledgeBase):
                             stt.annotations["id"] = ct_id
                             stt.annotations["section"] = section
                             stt.annotations["index"] = idx
+                            stt.annotations["SSKB_ID"] = f"{self.id}::{ct_id}"
 
                             for tok in self.tokenizer(stt.surface):
                                 token = Token()
@@ -62,6 +63,7 @@ class NLI4CTKB(KnowledgeBase):
                         stt.annotations["type"] = data[uuid]["Type"]
                         stt.annotations["section_id"] = data[uuid]["Section_id"]
                         stt.annotations["primary_id"] = data[uuid]["Primary_id"]
+                        stt.annotations["SSKB_ID"] = f"{self.id}::{uuid}"
                         if ("Label" in data[uuid]):
                             stt.annotations["label"] = data[uuid]["Label"]
 

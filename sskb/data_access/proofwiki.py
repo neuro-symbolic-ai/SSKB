@@ -48,6 +48,7 @@ class ProofWikiKB(KnowledgeBase):
                     stt.annotations["split"] = "KB"
                     stt.annotations["type"] = "fact"
                     stt.annotations["id"] = int(key)
+                    stt.annotations["SSKB_ID"] = f"{self.id}::{key}"
 
                     for tok in self.tokenizer(stt.surface):
                         token = Token()
@@ -66,6 +67,7 @@ class ProofWikiKB(KnowledgeBase):
                         stt.annotations["split"] = split
                         stt.annotations["type"] = "proposition"
                         stt.annotations["id"] = int(key)
+                        stt.annotations["SSKB_ID"] = f"{self.id}::{key}"
                         for prem_id in data[key]["premises"]:
                             if (prem_id in self.key_idx):
                                 stt.premises.extend(self.key_idx[prem_id])
